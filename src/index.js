@@ -45,10 +45,15 @@ let ReactDOM = {
     }
 }
 
+// ReactDOM.render(
+//     React.createElement('h3', {id: 'h3'}, [
+//         React.createElement('span', {id: 'span'}, 'hello react!'),
+//         React.createElement('span', {id: 'span'}, 'hello vue!'),
+//     ]),
+//     document.getElementById('root')
+// );
+
 ReactDOM.render(
-    React.createElement('h3', {id: 'h3'}, [
-        React.createElement('span', {id: 'span'}, 'hello react!'),
-        React.createElement('span', {id: 'span'}, 'hello vue!'),
-    ]),
+    React.createElement('h3', {id: 'h3'}, 'hello react!'),
     document.getElementById('root')
 );
