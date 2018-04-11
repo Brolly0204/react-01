@@ -1,59 +1,34 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
-// let element = <div>
-//     <h3>hello react!</h3>
-// </div>;
+let root = document.getElementById('root');
 
-class ReactElement {
-    constructor(type, props) {
-        this.type = type;
-        this.props = props;
+class Counter extends Component {
+    constructor(props){
+    	super(props);
+    	this.state = {count: 0};
+    }
+
+    handlerClick = () => {
+        // this.setState({count: this.state.count + 1});
+        // this.setState({count: this.state.count + 1});
+
+        this.setState((prevState) => ({count: prevState.count + 1}));
+        this.setState((prevState) => ({count: prevState.count + 1}));
+
+        this.setState({count: this.state.count + 1}, () => {
+            this.setState({count: this.state.count + 1});
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <h3 onClick={this.handlerClick}>{this.state.count}</h3>
+            </div>
+        )
     }
 }
 
-let React = {
-    createElement(type, props = {}, childrens) {
-        let children = childrens;
-        if (childrens in Array) {
-            children = childrens.length === 1 ? childrens[0] : childrens;
-        }
-        return new ReactElement(type, {...props, children});
-    }
-}
-
-let ReactDOM = {
-    render(eleObject, container) {
-        let {type, props} = eleObject;
-        let elementNode = document.createElement(type);
-        for (let key in props) {
-            if (key === 'children') {
-                if (typeof props[key] === 'object') {
-                    props[key].forEach(item => {
-                        ReactDOM.render(item, elementNode);
-                    });
-                } else {
-                    elementNode.appendChild(document.createTextNode(props[key]))
-                }
-            } else if (key === 'className') {
-                elementNode.setAttribute('class', props[key]);
-            } else {
-                elementNode.setAttribute(key, props[key]);
-            }
-        }
-        container.appendChild(elementNode);
-    }
-}
-
-// ReactDOM.render(
-//     React.createElement('h3', {id: 'h3'}, [
-//         React.createElement('span', {id: 'span'}, 'hello react!'),
-//         React.createElement('span', {id: 'span'}, 'hello vue!'),
-//     ]),
-//     document.getElementById('root')
-// );
-
-ReactDOM.render(
-    React.createElement('h3', {id: 'h3'}, 'hello react!'),
-    document.getElementById('root')
-);
+ReactDOM.render(<Counter title={'hello clock!'}/>, root);
